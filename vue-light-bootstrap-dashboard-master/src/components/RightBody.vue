@@ -88,21 +88,26 @@
           
            <input type="hidden" name="" value=''/>
            <form action="" @submit="addUpcomingTask">
-
-              <input type="text" v-model="newTitle"/>
-              <input type="date" v-model="newDate" />
-            <select v-model="selected">
-                <option v-for="option in options" v-bind:key="option.value" :value="option.id">
-                {{ option.name }}
+              <label for="">title</label>
+              <input  type="text" style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;"  class="form-control" v-model="newTitle"/>
+              <label for="" style="marginBottom:0px !important;">dead line</label>
+              <input type="date" style="border: solid 1px black; marginBottom:20px !important; marginTop:0px !important;"   class="form-control" v-model="newDate" />
+              <label for="" style="marginBottom:0px !important;">Project</label>
+              <br>
+            <select v-model="selected" style="marginTop:0px !important;">
+                <option v-for="option in options"   v-bind:key="option.value" :value="option.id">
+                 {{ option.name }}
                 </option>
             </select>
-                  <input type="submit" value="Submit">
+            <br>
+            <br>
+
+             <b-button variant="outline-primary" type="submit" style="backgroundColor:#56ba6b!important; color:white;" value="Submit">Add Task</b-button>
+
            </form>
                   <template #modal-footer>
-                      <b>Custom Footer</b>
-                          <!-- <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)"> -->
-                            update
-                          <!-- </b-button>       -->
+                      <b></b>
+     
                   </template>
         </b-modal>
 
@@ -134,15 +139,16 @@
           <td style="padding-right:50px;">{{upcomingtask.deadline}}</td>
           <td> <img src="/images/del.png"  @click="delUpcoming(upcomingtask.id)"/>
                <img v-b-modal="upcomingtask.title" src="/images/edit.png"  alt="">
-                 <b-modal :id="upcomingtask.title" title="BootstrapVue">
-                             
-                                    <input type="hidden" :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
-        
-                                    <input type="text" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
+                 <b-modal :id="upcomingtask.title" title="Update Task">
+
+                                    <input type="hidden" style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;"  :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
+                                    <label for="" style="marginBottom:0px !important;">Project</label>
+
+                                    <input type="text" style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
                               <template #modal-footer>
-                                          <b>Custom Footer</b>
+                                          
                                           <!-- Emulate built in modal footer ok and cancel button actions -->
-                                          <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)">
+                                          <b-button style="backgroundColor:#56ba6b!important; color:white;" variant="success" @click="updateUpcomingTask(upcomingtask.id)">
                                           update
                                           </b-button>
                 
@@ -175,12 +181,14 @@ export default {
             updatedTask:"",
             token   : "",
             user:null,
-           searchImg:'/images/search.png',
-          overlayImg:"/images/overlay.png",
-          plusImg:"/images/plus.png",
-          hamburgerImg:"/images/hamburger.png", 
-          projects:[] ,
-          search:''
+            searchImg:'/images/search.png',
+            overlayImg:"/images/overlay.png",
+            plusImg:"/images/plus.png",
+            hamburgerImg:"/images/hamburger.png", 
+            projects:[] ,
+            search:'',
+            selected: 'A',
+            options: [],
 
 
        };
@@ -224,6 +232,7 @@ logout(){
                 .then(({data})=>{
                      console.log(data)
                   this.projects = data;
+                  this.options= data;
 
                } )
                .catch((err)=>console.log(err));
@@ -255,13 +264,15 @@ logout(){
                } )
                .catch((err)=>console.log(err));
          },
-         addUpcomingTask(e){
+   addUpcomingTask(e){
             e.preventDefault();
             const newTasks ={
-                  title:this.newTask,
+                  title:this.newTitle,
                   completed:false ,
                   approved:false,
-                  waiting:true
+                  waiting:true,
+                  deadline:this.newDate,
+                  project_id:this.selected
             };
                axios.post('http://localhost:8000/api/upcoming',newTasks).then(()=>{this.upcoming.push(newTasks);})
           
