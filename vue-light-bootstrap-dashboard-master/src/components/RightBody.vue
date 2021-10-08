@@ -76,7 +76,7 @@
             <div class="add-tasks">
                 <h2>Upcoming</h2>
                 <div class="add-action">
-                      <img src="/images/add.png" alt="" srcset="">
+                      <img v-b-modal="'add'"  src="/images/add.png">
                 </div>
               </div>
  
@@ -84,6 +84,30 @@
                     <input type="text" v-model="newTask">  
                    
                 </form>
+        <b-modal id="add" title="Add Element">
+          
+           <input type="hidden" name="" value=''/>
+           <form action="" @submit="addUpcomingTask">
+
+              <input type="text" v-model="newTitle"/>
+              <input type="date" v-model="newDate" />
+            <select v-model="selected">
+                <option v-for="option in options" v-bind:key="option.value" :value="option.id">
+                {{ option.name }}
+                </option>
+            </select>
+                  <input type="submit" value="Submit">
+           </form>
+                  <template #modal-footer>
+                      <b>Custom Footer</b>
+                          <!-- <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)"> -->
+                            update
+                          <!-- </b-button>       -->
+                  </template>
+        </b-modal>
+
+
+
     <table style="padding-top:50px!important;">
       <thead>
         <tr>

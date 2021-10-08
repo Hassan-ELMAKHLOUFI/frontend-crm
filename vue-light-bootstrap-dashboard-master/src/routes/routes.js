@@ -6,6 +6,7 @@ import NotFound from '../pages/NotFoundPage.vue'
 import Overview from 'src/pages/Overview.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import Tasks from 'src/pages/Tasks.vue'
+import Activities from 'src/pages/Activities.vue'
 import Task from 'src/pages/task.vue'
 import Typography from 'src/pages/Typography.vue'
 import Icons from 'src/pages/Icons.vue'
@@ -92,7 +93,18 @@ const routes = [
           })
       }
       },
-
+      {
+        path: 'activities',
+        name: 'activities',
+        component: Activities,
+        beforeEnter:(to,form,next)=>{
+          axios.get('http://localhost:8000/api/isadmin').then(()=>{
+              next()
+          }).catch(()=>{
+              return next({name:'login'})
+          })
+      }
+      },
 
 
 
