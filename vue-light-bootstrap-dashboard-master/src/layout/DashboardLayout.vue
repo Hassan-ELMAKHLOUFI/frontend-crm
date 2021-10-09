@@ -2,9 +2,10 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/admin/overview">
-        <i class="nc-icon nc-chart-pie-35"></i>
-        <p>Dashboard</p>
+ 
+      <sidebar-link to="/admin/projects">
+          <i class="nc-icon nc-paper-2"></i>
+          <p>Projects</p>
       </sidebar-link>
       <sidebar-link to="/admin/user">
         <i class="nc-icon nc-circle-09"></i>
@@ -14,9 +15,11 @@
         <i class="nc-icon nc-notes"></i>
         <p>Tasks</p>
       </sidebar-link>
-      <sidebar-link to="/admin/projects">
-        <i class="nc-icon nc-paper-2"></i>
-        <p>Projects</p>
+
+
+      <sidebar-link to="/admin/Activities">
+        <i class="nc-icon nc-chart-pie-35"></i>
+        <p> Users Activities</p>
       </sidebar-link>
 
 

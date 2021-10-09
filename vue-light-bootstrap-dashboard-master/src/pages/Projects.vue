@@ -8,8 +8,11 @@
           >
             <template slot="header">
               <h4 class="card-title">Table of Projects </h4>
+              <br>
+              <br>
+              <label for="" style="color:black;">Search</label>
+              <br>
               <input type="text" v-model="search">
-              <button @click="logout()">logout</button>
             </template>
 
         <b-modal id="add" title="Add Element">

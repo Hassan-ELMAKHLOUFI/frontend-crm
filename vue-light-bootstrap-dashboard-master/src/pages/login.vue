@@ -107,7 +107,7 @@ export default {
                             if(data.is_admin==0){
                                  this.$router.push({name:'task'});
                             }else {
-                                this.$router.push({name:'Overview'});
+                                this.$router.push({name:'projects'});
                             }
                        
 
