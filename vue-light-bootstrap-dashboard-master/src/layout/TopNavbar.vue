@@ -55,7 +55,7 @@
             <a class="dropdown-item" href="#">Separated link</a>
           </base-dropdown>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#"  @click="logout()" class="nav-link">
               Log out
             </a>
           </li>
@@ -78,6 +78,11 @@
       }
     },
     methods: {
+      logout(){
+          axios.post('http://localhost:8000/api/logout').then(()=>{
+              this.$router.push({name:'login'});
+          })
+      },
       capitalizeFirstLetter (string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
       },
