@@ -52,36 +52,29 @@
 
   <div id="right">
 
-        <h1>Developement CRM </h1>
+        <h1> customer retail management</h1>
         <div class="horizontal">
               <img v-bind:src="horizontalImg">
         </div>
 
-        <p>Lorem, ipsum dolor sit amet consectetur 
-              adipisicing elit. Quaerat cumque facere, modi
-              odio eveniet obcaecati rem. Natus, 
-              quibusdam facere et ratione eum necessitatibus!
-         </p>
+    <div class="search">
+        <label for=""> Search</label>
+        <br>
+        <input placeholder="search your tasks" v-model="search" style="border: solid 1px black !important; marginBottom:20px !important;width:200px; marginTop:0px !important;">
+        
 
-  <div class="task">
-        <div class="add-tasks">
-              <h2>Today's Task</h2>
+    </div>
 
-              <div class="add-action">
-                        <img src="/images/add.png" alt="">
-               </div>
-        </div>
-  <ul class="tasks-list"></ul> </div>
         <div class="upcoming">
             <div class="add-tasks">
-                <h2>Upcoming</h2>
+                
                 <div class="add-action">
                       <img v-b-modal="'add'"  src="/images/add.png">
                 </div>
               </div>
  
                 <form action="" @submit="addUpcomingTask">
-                    <input type="text" v-model="newTask">  
+                    <input type="text"  v-model="newTask">  
                    
                 </form>
         <b-modal id="add" title="Add Element">
