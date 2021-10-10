@@ -9,7 +9,7 @@
             <template slot="header">
               <h4 class="card-title">Users Activities Table </h4>
               <br>
-              <label style="color: black;" for="">Search</label>
+              <label  for="">Search</label>
               <br>
               <input type="text" v-model="search">
             </template>
