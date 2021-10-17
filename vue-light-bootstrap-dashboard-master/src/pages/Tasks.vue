@@ -82,7 +82,15 @@
         </tr>
       </tbody>          
     </table>
-
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#" @click="PreviousPage()">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(0)">1</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(1)">2</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(2)">3</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="NextPage()">Next</a></li>
+  </ul>
+</nav>
           </card>
 
         </div>
@@ -120,7 +128,8 @@
             selected: 'A',
             options: [],
             newProject:"",
-            search:''
+            search:'',
+            cPage :1
       }
     },
 
@@ -137,6 +146,36 @@ computed:{
   }
 },
     methods:{
+
+       PreviousPage(){
+          if(this.cPage>0){
+          this.cPage--;
+                 axios.get(`http://localhost:8000/api/upcoming/${this.cPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.upcoming= res.data[0];
+                this.cPage=res.data[1];
+              });
+            }
+        },
+        NextPage(){
+          if(this.upcoming.length !=0){
+                this.cPage++;
+                axios.get(`http://localhost:8000/api/upcoming/${this.cPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.upcoming= res.data[0];
+                this.cPage=res.data[1];
+              });
+            }
+        },
+        change(currentPage){
+
+            axios.get(`http://localhost:8000/api/upcoming/${currentPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.upcoming= res.data[0];
+                this.cPage=res.data[1];
+              });
+              },
+
         fetchprojects(){
                fetch('http://localhost:8000/api/project')
                .then( (res) => res.json())
@@ -149,14 +188,11 @@ computed:{
          },
 
         fetchUpcoming(){
-               fetch('http://localhost:8000/api/upcoming')
-               .then( (res) => res.json())
-                .then(({data})=>{
-                     console.log(data)
-                  this.upcoming= data;
-
-               } )  
-               .catch((err)=>console.log(err));
+            axios.get(`http://localhost:8000/api/upcoming/0`).then(res=>{
+                console.log(res.data[0]);
+                this.upcoming= res.data[0];
+                this.cPage=res.data[1];
+              });
          },
          addUpcomingTask(e){
             e.preventDefault();

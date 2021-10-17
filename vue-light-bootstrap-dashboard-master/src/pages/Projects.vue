@@ -80,6 +80,15 @@
       </tbody>          
     </table>
 
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#" @click="PreviousPage()">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(0)">1</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(1)">2</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(2)">3</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="NextPage()">Next</a></li>
+  </ul>
+</nav>
  <!-- <b-table
       :items="filteredProjects "
       :fields="fields"
@@ -141,11 +150,7 @@
             newDescription:"",
             newName:"",
             search:'',
-            fields: [
-                    { key: 'name', label: 'Person full name'},
-                    { key: 'description', label: 'description', sortable: true, class: 'text-center' },
-                    
-        ]
+            cPage:1,
       }
     },
 
@@ -160,20 +165,43 @@ computed:{
   }
 },
     methods:{
-       info(item, index, button) {
-          this.infoModal.title = `Row index: ${index}`
-          this.infoModal.content = JSON.stringify(item, null, 2)
-          this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-      },
-        fetchProject(){
-               fetch('http://localhost:8000/api/project')
-               .then( (res) => res.json())
-                .then(({data})=>{
-                     console.log(data)
-                  this.projects= data;
 
-               } )  
-               .catch((err)=>console.log(err));
+        PreviousPage(){
+          if(this.cPage>0){
+          this.cPage--;
+                 axios.get(`http://localhost:8000/api/project/${this.cPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.projects= res.data[0];
+                this.cPage=res.data[1];
+              });
+            }
+        },
+        NextPage(){
+          if(this.projects.length !=0){
+                this.cPage++;
+                axios.get(`http://localhost:8000/api/project/${this.cPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.projects= res.data[0];
+                this.cPage=res.data[1];
+              });
+            }
+        },
+        change(currentPage){
+
+            axios.get(`http://localhost:8000/api/project/${currentPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.projects= res.data[0];
+                this.cPage=res.data[1];
+              });
+              },
+             
+      
+        fetchProject(){
+            axios.get(`http://localhost:8000/api/project/0`).then(res=>{
+                console.log(res.data[1]);
+                this.projects= res.data[0];
+                this.cPage=res.data[1];
+              });
          },
          addProject(e){
             e.preventDefault();
