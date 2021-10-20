@@ -52,7 +52,7 @@
 
   <div id="right">
 
-        <h1> customer retail management</h1>
+        
         <div class="horizontal">
               <img v-bind:src="horizontalImg">
         </div>
@@ -137,7 +137,7 @@
                                     <input type="hidden" style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;"  :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
                                     <label for="" style="marginBottom:0px !important;">Project</label>
 
-                                    <input type="text" style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
+                                    <input type="text" class="form-control"  style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
                               <template #modal-footer>
                                           
                                           <!-- Emulate built in modal footer ok and cancel button actions -->

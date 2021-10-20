@@ -15,21 +15,28 @@
           
            <input type="hidden" name="" value=''/>
            <form action="" @submit="addUpcomingTask">
-
-              <input type="text" v-model="newTitle"/>
-              <input type="date" v-model="newDate" />
-            <select v-model="selected">
+               <label for="">Title</label>
+              <input type="text" class="form-control"  style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;" v-model="newTitle"/>
+              <label for="">Date</label>
+              <input type="date" class="form-control"  style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;" v-model="newDate" />
+           <label for="">Project</label>
+            <select type="date" class="form-control"  style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;"  v-model="selected">
                 <option v-for="option in options" v-bind:key="option.value" :value="option.id">
                 {{ option.name }}
                 </option>
             </select>
-                  <input type="submit" value="Submit">
+            <br>
+                     <input size="sm" variant="success" style="backgroundColor: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  textAlign: center;
+  textDecoration: none;
+  fontSize: 16px;
+  cursor: pointer;" type="submit"  value="Submit">
            </form>
                   <template #modal-footer>
-                      <b>Custom Footer</b>
-                          <!-- <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)"> -->
-                            update
-                          <!-- </b-button>       -->
+                      <b></b>
                   </template>
         </b-modal>
 
@@ -66,11 +73,10 @@
                              
                                     <input type="hidden" :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
         
-                                    <input type="text" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
+                                    <input type="text" class="form-control"  style="border: solid 1px black !important; marginBottom:20px !important; marginTop:0px !important;" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
                               <template #modal-footer>
-                                          <b>Custom Footer</b>
-                                          <!-- Emulate built in modal footer ok and cancel button actions -->
-                                          <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)">
+                                         
+                                          <b-button size="sm"  variant="success" @click="updateUpcomingTask(upcomingtask.id)">
                                           update
                                           </b-button>
                 

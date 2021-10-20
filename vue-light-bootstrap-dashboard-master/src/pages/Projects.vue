@@ -26,9 +26,14 @@
               <label for=""> Description</label>
               <input type="text" class="form-control" v-model="newDescription" />
               <br>
-                  <input size="sm" variant="success" type="submit" value="Submit">
+                  <input size="sm" variant="success" type="submit"  value="Submit">
+
+
            </form>
-        
+                   <template #modal-footer>
+                    <b></b>             
+                   </template>
+
         </b-modal>
       <img v-b-modal="'add'"  src="/images/add.png" style="margin-left:90%;" alt=""> 
  <table class="table">
@@ -66,8 +71,7 @@
                                     <input type="text" class="form-control" :id="'finished'+project.id"  :value="project.finished" />
                               <template #modal-footer>
                                           <b></b>
-                                           Emulate built in modal footer ok and cancel button actions 
-                                          <b-button size="sm" variant="success" @click="updateProject(project.id)">
+                                          <b-button size="sm" style="marginRight:400px !important;" variant="success" @click="updateProject(project.id)">
                                           update
                                           </b-button>
                 
