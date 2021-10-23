@@ -4,7 +4,7 @@ import NotFound from '../pages/NotFoundPage.vue'
 
 // Admin pages
 import Overview from 'src/pages/Overview.vue'
-import UserProfile from 'src/pages/UserProfile.vue'
+import User from 'src/pages/Users.vue'
 import Tasks from 'src/pages/Tasks.vue'
 import Activities from 'src/pages/Activities.vue'
 import Task from 'src/pages/task.vue'
@@ -77,9 +77,16 @@ const routes = [
 
 
       {
-        path: 'user',
+        path: 'users',
         name: 'User',
-        component: UserProfile
+        component: User,
+        beforeEnter:(to,form,next)=>{
+          axios.get('http://localhost:8000/api/isadmin').then(()=>{
+              next()
+          }).catch(()=>{
+              return next({name:'login'})
+          })
+      }
       },
       {
         path: 'tasks',
