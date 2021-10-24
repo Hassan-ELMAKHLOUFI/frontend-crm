@@ -199,6 +199,7 @@ computed:{
                   is_admin:this.newRole
         
             };
+            
                axios.post('http://localhost:8000/api/user',newUser).then(res =>{this.users.push(res.data.data[0]);})
           
  
