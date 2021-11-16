@@ -53,7 +53,15 @@
     </div>
 
 
-  
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#" @click="PreviousPage()">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(0)">1</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(1)">2</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="change(2)">3</a></li>
+    <li class="page-item"><a class="page-link" href="#" @click="NextPage()">Next</a></li>
+  </ul>
+</nav>
   </div>
 </template>
 <script>
@@ -71,6 +79,7 @@
             user:null,
 
             search:'',
+            cPage:1
 
       }
     },
@@ -86,17 +95,47 @@ computed:{
   }
 },
     methods:{
+        PreviousPage(){
+          if(this.cPage>0){
+          this.cPage--;
+                 axios.get(`http://localhost:8000/api/activity/${this.cPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.Activities= res.data[0];
+                this.cPage=res.data[1];
+              });
+            }
+        },
+        NextPage(){
+          if(this.Activities.length !=0){
+                this.cPage++;
+                axios.get(`http://localhost:8000/api/activity/${this.cPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.Activities= res.data[0];
+                this.cPage=res.data[1];
+              });
+            }
+        },
+        change(currentPage){
+
+            axios.get(`http://localhost:8000/api/activity/${currentPage}`).then(res=>{
+                console.log(res.data[1]);
+                this.Activities= res.data[0];
+                this.cPage=res.data[1];
+              });
+              },
+
+
+
+
+
 
         fetchActivities(){
     
-               fetch('http://localhost:8000/api/activity')
-               .then( (res) => res.json())
-                .then(({data})=>{
-                     console.log(data)
-                     this.Activities= data;
-
-               } )  
-               .catch((err)=>console.log(err));
+         axios.get(`http://localhost:8000/api/activity/0`).then(res=>{
+                console.log(res.data[1]);
+                this.Activities= res.data[0];
+                this.cPage=res.data[1];
+              });
          },
 
 
